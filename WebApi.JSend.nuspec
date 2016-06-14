@@ -12,7 +12,7 @@
     <tags>aspnet webapi jsend</tags>
   </metadata>
   <files>
-    <file src="bin\Release\*.dll" target="lib\" />
-    <file src="bin\Release\*.pdb" target="lib\" />
+    <file src="source\bin\Release\*.dll" target="lib\net451" />
+    <file src="source\bin\Release\*.pdb" target="lib\net451" />
   </files>
 </package>

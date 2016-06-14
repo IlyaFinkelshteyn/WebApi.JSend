@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>WebApi.JSend</id>
+    <version>$version$</version>
+    <authors>Sergey Akopov</authors>
+    <licenseUrl>https://github.com/sakopov/WebApi.JSend/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/sakopov/WebApi.JSend</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Simple implementation of the JSend specification for ASP.NET Web API.</description>
+    <copyright>Copyright 2016 Sergey Akopov</copyright>
+    <tags>aspnet webapi jsend</tags>
+  </metadata>
+  <files>
+    <file src="bin\Release\*.dll" target="lib\" />
+    <file src="bin\Release\*.pdb" target="lib\" />
+  </files>
+</package>

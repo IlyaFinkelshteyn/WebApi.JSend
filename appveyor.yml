@@ -51,6 +51,8 @@ build:
   # MSBuild verbosity level
   verbosity: detailed
 
+before_build:
+  - nuget restore
 
 #---------------------------------#
 #      artifacts configuration    #

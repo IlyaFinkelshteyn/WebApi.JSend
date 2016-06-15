@@ -76,3 +76,5 @@ deploy:
     api_key:
       secure: ZyNMTHl83Q+jbtyCaweu6ULT7jo2dGq+lF7TibDcVyE1aH9KKvdmf9FEHkRQHVCL
     artifact: nuget
+    on:
+      branch: master

@@ -32,6 +32,9 @@ nuget:
   project_feed: true
   disable_publish_on_pr: true     
 
+cache:
+  - packages -> **\packages.config  # preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
+
 #---------------------------------#
 #       build configuration       #
 #---------------------------------#
@@ -59,6 +62,4 @@ before_build:
 #---------------------------------#
 
 artifacts:
-
-  # pushing all *.nupkg files in build directory recursively
-  - path: '**\*.nupkg'
+  - path: '*.nupkg'

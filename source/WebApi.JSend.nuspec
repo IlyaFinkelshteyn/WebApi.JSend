@@ -17,7 +17,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="source\bin\Release\*.dll" target="lib\net451" />
-    <file src="source\bin\Release\*.pdb" target="lib\net451" />
+    <file src="bin\Release\*.dll" target="lib\net451" />
+    <file src="bin\Release\*.pdb" target="lib\net451" />
   </files>
 </package>

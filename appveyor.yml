@@ -30,7 +30,7 @@ nuget:
   disable_publish_on_pr: true     
 
 cache:
-- packages -> **\packages.config  # preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
+  - packages -> **\packages.config  # preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
 
 #---------------------------------#
 #       build configuration       #
@@ -41,32 +41,32 @@ platform: Any CPU
 configuration: Release
 
 build:
-  parallel: true
-  project: WebApi.JSend.sln
-  publish_nuget: true
-  publish_nuget_symbols: true
+  parallel: true                  # enable MSBuild parallel builds
+  project: WebApi.JSend.sln      # path to Visual Studio solution or project
+  publish_nuget: true             # package projects with .nuspec files and push to artifacts
+  publish_nuget_symbols: true     # generate and publish NuGet symbol packages
 
   verbosity: detailed
 
 before_build:
-- nuget restore
+  - nuget restore
 
 #---------------------------------#
 #      artifacts configuration    #
 #---------------------------------#
 
 artifacts:
-- path: '*.nupkg'
-  name: NuGet
+  - path: '*.nupkg'
 
 #---------------------------------#
 #     deployment configuration    #
 #---------------------------------#
 
 deploy:
-- provider: NuGet
-  api_key:
-    secure: ZyNMTHl83Q+jbtyCaweu6ULT7jo2dGq+lF7TibDcVyE1aH9KKvdmf9FEHkRQHVCL
-  artifact: NuGet
-  on:
-    branch: master
+
+  - provider: NuGet
+    api_key:
+      secure: ZyNMTHl83Q+jbtyCaweu6ULT7jo2dGq+lF7TibDcVyE1aH9KKvdmf9FEHkRQHVCL
+    artifact: /.*\.nupkg/
+    on:
+      branch: master

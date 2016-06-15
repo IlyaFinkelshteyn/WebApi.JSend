@@ -41,10 +41,10 @@ platform: Any CPU
 configuration: Release
 
 build:
-  parallel: true                  # enable MSBuild parallel builds
-  project: WebApi.JSend.sln      # path to Visual Studio solution or project
-  publish_nuget: true             # package projects with .nuspec files and push to artifacts
-  publish_nuget_symbols: true     # generate and publish NuGet symbol packages
+  parallel: true
+  project: WebApi.JSend.sln
+  publish_nuget: true
+  publish_nuget_symbols: true
 
   verbosity: detailed
 

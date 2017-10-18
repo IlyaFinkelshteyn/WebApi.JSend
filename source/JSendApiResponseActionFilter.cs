@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Filters;
+using System;
 
 namespace WebApi.JSend
 {
@@ -12,27 +13,30 @@ namespace WebApi.JSend
         {
             var response = actionExecutedContext.Response;
 
-            if (response != null)
+            var hasCustomMediaTypeResponse = response?.Content?.Headers?.ContentType?.MediaType != null
+                    && !string.Equals(response.Content.Headers.ContentType.MediaType, "application/json", StringComparison.InvariantCultureIgnoreCase);
+
+            if (response == null || hasCustomMediaTypeResponse)
             {
-                object content;
-
-                response.TryGetContentValue(out content);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(response.StatusCode, new JSendApiResonse(JSendStatus.Success, content));
-                }
-                else
-                {
-                    var error = content as HttpError;
-
-                    actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(response.StatusCode, error == null
-                        ? new JSendApiResonse(JSendStatus.Fail, content, DefaultMessage)
-                        : new JSendApiResonse(JSendStatus.Fail, error.ModelState, error.Message));
-                }
+                base.OnActionExecuted(actionExecutedContext);
+                return;
             }
 
-            base.OnActionExecuted(actionExecutedContext);
+            object content;
+
+            response.TryGetContentValue(out content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(response.StatusCode, new JSendApiResonse(JSendStatus.Success, content));
+                return;
+            }
+
+            var error = content as HttpError;
+
+            actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(response.StatusCode, error == null
+                ? new JSendApiResonse(JSendStatus.Fail, content, DefaultMessage)
+                : new JSendApiResonse(JSendStatus.Fail, error.ModelState, error.Message));
         }
     }
 }
